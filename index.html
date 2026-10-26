@@ -858,7 +858,7 @@ function pick(q){
 /* 적은 표본 경고 */
 function smallNote(n){
   if(n===0) return el('div','warn','선택한 조건에 해당하는 응답이 없습니다.');
-  if(n<30)  return el('div','warn',`응답 ${n}명 — 표본이 적어 해석에 주의가 필요합니다.`);
+  /* 30명 미만 주의 문구는 뺌 (민석 10-26) */
   return null;
 }
 function scopeName(){
