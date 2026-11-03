@@ -177,8 +177,16 @@ main{padding:var(--pad);padding-bottom:88px}
 .ins li::marker{color:var(--gs-blue)}
 
 /* ---------- 표 / 휴대폰 카드 전환 ---------- */
-.xt{display:none}                 /* 휴대폰: 표를 감추고 */
-.xcards{display:block}            /* 카드로 세로 배치 */
+/* 휴대폰도 PC와 같은 표로 보여 줌. 넘치면 표 안에서 옆으로 밂 (민석 11-03) */
+.xwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.xt{display:table;width:100%;font-size:.75rem;border-collapse:collapse}
+.xt th,.xt td{border:1px solid var(--line);padding:6px 4px;text-align:center}
+.xt th{background:#F2F5F7;font-weight:700;color:var(--ink-2)}
+.xt td:first-child,.xt th:first-child{text-align:left}
+.xt th.dv,.xt td.dv{border-left:3px double var(--ink-3)}
+.xt tbody tr:nth-child(even) td{background:#FAFBFC}
+.xcards{display:none}
+.mob-only{display:none}
 .xc{
   border:1px solid var(--line);border-radius:8px;padding:11px 12px;margin-bottom:9px;
   background:#FBFCFD;
@@ -756,7 +764,7 @@ function insight(lines){
 
 /* 교차표 — 데스크톱은 표, 휴대폰은 카드. 둘 다 그려 두고 CSS로 전환함 */
 function crossTable(colNames, rows, opt){
-  const wrapEl = el('div');
+  const wrapEl = el('div','xwrap');
   opt = opt||{};
   /* 표 */
   const t = el('table','xt');
